@@ -238,7 +238,7 @@ async def start(message: Message, state: FSMContext):
             "📌 /ai - RiseUp AI yordamchi\n"
             "📌 /help — qo'llanma\n"
             "💰 /hissa — RiseUp ga hissa qo'shing\n\n"
-            "Yangi savollar yaratish uchun yoki natijangizni bilish uchun riseuply.uz saytiga kiring 😉"
+            "Yangi savollar yaratish uchun yoki natijangizni bilish uchun riseuply.vercel.app saytiga kiring 😉"
         )
         return
 
@@ -246,7 +246,7 @@ async def start(message: Message, state: FSMContext):
     await state.set_state(sign.login)
     await message.answer(
         "Assalomu alaykum! 👋\n"
-        "Iltimos, riseuply.uz website dagi emailingizni kiriting:"
+        "Iltimos, riseuply.vercel.app website dagi emailingizni kiriting:"
     )
 
 
@@ -306,7 +306,7 @@ async def get_password(message: Message, state: FSMContext):
         f"📌/ai - RiseUp AI yordamchi\n"
         f"📌/help — qo'llanma\n"
         f"💰 /hissa — RiseUp ga hissa qo'shing"
-        f"\n\nYangi savollar yaratish uchun yoki natijangizni bilish uchun riseuply.uz saytiga kiring 😉"
+        f"\n\nYangi savollar yaratish uchun yoki natijangizni bilish uchun riseuply.vercel.app saytiga kiring 😉"
     )
     await state.clear()
 
@@ -350,7 +350,7 @@ async def show_tasks(message: Message, state: FSMContext):
         return
 
     if not tasks:
-        await message.answer("📭 Sizda hozircha birorta ham task yo'q.\n riseuply.uz saytidan kirib hoziroq boshlang!")
+        await message.answer("📭 Sizda hozircha birorta ham task yo'q.\n riseuply.vercel.app saytidan kirib hoziroq boshlang!")
         return
 
     kb = InlineKeyboardBuilder()
@@ -768,8 +768,8 @@ async def javaeng(message: Message):
 async def hissa_command(message: Message):
     user_id = message.from_user.id
     await message.answer(
-        f"Salom, hurmatli foydalanuvchi! Sizning RiseUp botimizni rivojlantirishga bo'lgan qiziqishingiz uchun tashakkur! "
-        f"Agar siz botimizga hissa qo'shishni xohlasangiz, quyidagi havola orqali buni amalga oshirishingiz mumkin."
-        f"Sizning qo'llab-quvvatlashingiz biz uchun juda muhim va biz bunga juda minnatdormiz! "
-        f"Sizning hissangiz riseuply.uz & @riseupuz_bot loyihamizni yanada yaxshilashga yordam beradi. Rahmat! 👇"
+        f"Salom, hurmatli foydalanuvchi! Sizning RiseUp loyihamizni rivojlantirishga bo'lgan qiziqishingiz uchun tashakkur 😊"
+        f"Agar siz loyihamizga hissa qo'shishni xohlasangiz, quyidagi havola orqali buni amalga oshirishingiz mumkin 🔗"
+        f"Sizning qo'llab-quvvatlashingiz biz uchun juda muhim va biz bundan juda minnatdormiz 🙏\n\n"
+        f"Sizning hissangiz riseuply.vercel.app & @riseupuz_bot loyihamizni yanada yaxshilashga yordam beradi. Rahmat! 👇"
     , reply_markup=hissa)
