@@ -443,44 +443,48 @@ async def cancel_answer(message: Message, state: FSMContext):
     await message.answer("❌ Javob berish bekor qilindi. Istasangiz /task bilan qayta tanlashingiz mumkin.")
 
 
-@router.message(TaskSolve.waiting_answer)
+@router.message(TaskSolve.waiting_answer, F.text, ~F.text.startswith("/"))
 async def check_task_answer(message: Message, state: FSMContext):
     tg_id = message.from_user.id
     tokens = USER_TOKENS.get(tg_id)
 
     if not tokens:
-        await message.answer("⛔ Sessiya topilmadi. /start orqali qayta kirib ko‘ring.")
+        await message.answer("⛔ Sessiya topilmadi. /start orqali qayta kiring.")
         await state.clear()
         return
 
     data = await state.get_data()
     task_id = data.get("task_id")
     if not task_id:
-        await message.answer("⚠️ Task ma'lumoti topilmadi. /task buyrug'i bilan qayta urinib ko‘ring.")
+        await message.answer("⚠️ Task topilmadi. /task bilan qayta urinib ko‘ring.")
         await state.clear()
         return
 
-    access = tokens["access"]
+    try:
+        status, task = await api_request("GET", API_TASK_DETAIL.format(id=task_id), access=tokens["access"])
+        if status != 200:
+            await message.answer("⚠️ Taskni olishda xatolik.")
+            return
 
-    status, task = await api_request("GET", API_TASK_DETAIL.format(id=task_id), access=access)
+        correct, result_text = await evaluate_answer(task, message.text or "")
+        await message.answer(result_text, parse_mode="Markdown")
 
-    if status != 200:
-        await message.answer("⚠️ Taskni olishda xatolik yuz berdi.")
+        # stats update — xato bo'lsa ham bot "osilib" qolmasin
+        try:
+            await api_request(
+                "POST",
+                "https://api.riseuply.uz/api/stats/update/",
+                access=tokens["access"],
+                json={"correct": correct},
+            )
+        except Exception as e:
+            # xohlasang log qil
+            print("stats update error:", e)
+
+        await message.answer("🔁 Yana savol ko‘rmoqchi bo‘lsangiz, /task yuboring.")
+    finally:
+        # ✅ har doim state tozalanadi
         await state.clear()
-        return
-
-    correct, result_text = await evaluate_answer(task, message.text or "")
-    await message.answer(result_text, parse_mode="Markdown")
-    
-    async with aiohttp.ClientSession() as session:
-        await session.post(
-            "https://api.riseuply.uz/api/stats/update/",
-            json={"correct": correct},
-            headers={"Authorization": f"Bearer {tokens['access']}"}
-        )
-        
-    await state.clear()
-    await message.answer("🔁 Yana savol ko‘rmoqchi bo‘lsangiz, /task buyrug‘ini yuboring.")
 
 
 @router.message(F.reply_to_message & F.text & ~F.text.startswith("/"))
