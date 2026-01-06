@@ -235,6 +235,7 @@ async def start(message: Message, state: FSMContext):
             "Quyidagi buyruqlardan foydalanishingiz mumkin:\n"
             "📌 /task — sayt orqali yaratilgan savollaringiz ro'yxati\n"
             "📌 /course — kurslar menyusi\n"
+            "📌 /ai - RiseUp AI yordamchi\n"
             "📌 /help — qo'llanma\n"
             "💰 /hissa — RiseUp ga hissa qo'shing\n\n"
             "Yangi savollar yaratish uchun yoki natijangizni bilish uchun riseuply.uz saytiga kiring 😉"
