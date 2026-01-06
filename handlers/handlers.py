@@ -29,10 +29,11 @@ router = Router()
 
 API_BASE = "https://riseup-back-production.up.railway.app/api"
 
-API_LOGIN      = f"{API_BASE}/auth/login/"
-API_LINK_TG    = f"{API_BASE}/auth/link-telegram/"
-API_TASKS      = f"{API_BASE}/tasks/"
-API_TASK_DETAIL= f"{API_BASE}/tasks/{{id}}/"
+API_LOGIN = f"{API_BASE}/auth/login/"
+API_LINK_TG = f"{API_BASE}/auth/link-telegram/"
+API_TASKS = f"{API_BASE}/tasks/"
+API_TASK_DETAIL = f"{API_BASE}/tasks/{{id}}/"
+API_STATS_UPDATE = f"{API_BASE}/stats/update/"
 
 # telegram_id -> {"access": ..., "refresh": ..., "email": ..., "username": ...}
 USER_TOKENS = {}
@@ -473,7 +474,7 @@ async def check_task_answer(message: Message, state: FSMContext):
         try:
             await api_request(
                 "POST",
-                "https://api.riseuply.uz/api/stats/update/",
+                API_STATS_UPDATE,
                 access=tokens["access"],
                 json={"correct": correct},
             )
