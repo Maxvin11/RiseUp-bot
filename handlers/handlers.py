@@ -27,7 +27,7 @@ router = Router()
 
 # ==================== API URL'LAR ====================
 
-API_BASE = "https://api.riseuply.uz/api"
+API_BASE = "https://riseup-back-production.up.railway.app/api"
 
 API_LOGIN      = f"{API_BASE}/auth/login/"
 API_LINK_TG    = f"{API_BASE}/auth/link-telegram/"
