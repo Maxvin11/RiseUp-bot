@@ -27,11 +27,12 @@ router = Router()
 
 # ==================== API URL'LAR ====================
 
-API_LOGIN = "https://api.riseuply.uz/api/auth/login/"
-API_LINK_TG = "https://api.riseuply.uz/api/auth/link-telegram/"
-API_TASKS = "https://api.riseuply.uz/api/tasks/"
-API_TASK_DETAIL = "https://api.riseuply.uz/api/tasks/{id}/"
+API_BASE = "https://api.riseuply.uz/api"
 
+API_LOGIN      = f"{API_BASE}/auth/login/"
+API_LINK_TG    = f"{API_BASE}/auth/link-telegram/"
+API_TASKS      = f"{API_BASE}/tasks/"
+API_TASK_DETAIL= f"{API_BASE}/tasks/{{id}}/"
 
 # telegram_id -> {"access": ..., "refresh": ..., "email": ..., "username": ...}
 USER_TOKENS = {}
