@@ -774,7 +774,7 @@ async def hissa_command(message: Message):
     user_id = message.from_user.id
     await message.answer(
         f"Salom, hurmatli foydalanuvchi! Sizning RiseUp loyihamizni rivojlantirishga bo'lgan qiziqishingiz uchun tashakkur 😊"
-        f"Agar siz loyihamizga hissa qo'shishni xohlasangiz, quyidagi havola orqali buni amalga oshirishingiz mumkin 🔗"
+        f"Agar siz loyihamizga hissa qo'shishni xohlasangiz, quyidagi havola orqali buni amalga oshirishingiz mumkin 🔗\n"
         f"Sizning qo'llab-quvvatlashingiz biz uchun juda muhim va biz bundan juda minnatdormiz 🙏\n\n"
         f"Sizning hissangiz riseuply.vercel.app & @riseupuz_bot loyihamizni yanada yaxshilashga yordam beradi. Rahmat! 👇"
     , reply_markup=hissa)
