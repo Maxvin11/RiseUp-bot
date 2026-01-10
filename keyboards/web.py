@@ -5,7 +5,7 @@ web = ReplyKeyboardMarkup(
     [
         KeyboardButton(text = "Backend"),
         KeyboardButton(text = "Frontend"),
-        KeyboardButton(text = "Hissa qo'shish 💰")
+        KeyboardButton(text = "Hissa qo'shish 💰", url = "https://t.me/timurbek_ustozai")
     ],
     
 ],
